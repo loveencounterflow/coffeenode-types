@@ -1,0 +1,14 @@
+{
+  "name" : "POD",
+  "version" : "0.0.1",
+  "description" : "CoffeeNode TYPES library, POD-handling sub-module.",
+  "author": "loveencounterflow <paragate@gmx.net>",
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/XXXXXXXXXXXXXX/ZZZZZZZZ.git"
+  },
+  "main": "./main.coffee",
+  "engines" : {
+    "node" : ">= 0.4.0"
+  }
+}

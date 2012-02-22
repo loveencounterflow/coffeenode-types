@@ -1,0 +1,14 @@
+{
+  "name" : "TYPES",
+  "version" : "0.0.1",
+  "description" : "The tiny JavaScript type checking library that *can*.",
+  "author": "loveencounterflow <paragate@gmx.net>",
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/XXXXXXXXXXXXXX/ZZZZZZZZ.git"
+  },
+  "main": "./TYPES.coffee",
+  "engines" : {
+    "node" : ">= 0.4.0"
+  }
+}
