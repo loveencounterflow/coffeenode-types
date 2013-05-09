@@ -1,7 +1,7 @@
 
 
-.. image:: https://github.com/loveencounterflow/MULTIMIX/raw/master/artwork/multimix-small.png
-   :align: left
+.. .. image:: https://github.com/loveencounterflow/MULTIMIX/raw/master/artwork/multimix-small.png
+..    :align: left
 
 **CoffeeNode Types. You've waited for these guys. Now they're here. You've been warned**
 
