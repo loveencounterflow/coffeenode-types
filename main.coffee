@@ -41,7 +41,7 @@ js_type_of                = ( x ) -> return Object::toString.call x
 @type_of = ( x ) ->
   """Given any kind of value ``x``, return its type."""
   #.........................................................................................................
-  validate_argument_count_equals 1
+  # validate_argument_count_equals 1
   #.........................................................................................................
   return 'null'         if x is null
   return 'jsundefined'  if x is undefined
@@ -58,7 +58,7 @@ js_type_of                = ( x ) -> return Object::toString.call x
 @isa = ( x, probe ) ->
   """Given any value ``x`` and a non-empty text ``probe``, return whether ``TYPES/type_of x`` equals
   ``probe``."""
-  validate_name probe
+  # validate_name probe
   return ( @type_of x ) == probe
 
 
@@ -75,27 +75,27 @@ js_type_of                = ( x ) -> return Object::toString.call x
 # http://zaa.ch/past/2009/1/31/the_miller_device_on_null_and_other_lowly_unvalues/ # moved to:
 # http://zaa.ch/post/918977126/the-miller-device-on-null-and-other-lowly-unvalues
 #...........................................................................................................
-@isa_list          = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Array]'
-@isa_boolean       = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Boolean]'
-@isa_function      = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Function]'
-@isa_pod           = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Object]' and not Buffer.isBuffer x
-@isa_text          = ( x ) -> vaq 1; return ( js_type_of x ) == '[object String]'
-@isa_number        = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Number]' and isFinite x
-@isa_null          = ( x ) -> vaq 1; return x is null
-@isa_jsundefined   = ( x ) -> vaq 1; return x is undefined
-@isa_infinity      = ( x ) -> vaq 1; return x == Infinity or x == -Infinity
+@isa_list          = ( x ) -> return ( js_type_of x ) == '[object Array]'
+@isa_boolean       = ( x ) -> return ( js_type_of x ) == '[object Boolean]'
+@isa_function      = ( x ) -> return ( js_type_of x ) == '[object Function]'
+@isa_pod           = ( x ) -> return ( js_type_of x ) == '[object Object]' and not Buffer.isBuffer x
+@isa_text          = ( x ) -> return ( js_type_of x ) == '[object String]'
+@isa_number        = ( x ) -> return ( js_type_of x ) == '[object Number]' and isFinite x
+@isa_null          = ( x ) -> return x is null
+@isa_jsundefined   = ( x ) -> return x is undefined
+@isa_infinity      = ( x ) -> return x == Infinity or x == -Infinity
 #...........................................................................................................
-@isa_jsarguments   = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Arguments]'
-@isa_jsnotanumber  = ( x ) -> vaq 1; return isNaN x
-@isa_jsdate        = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Date]'
-@isa_jsglobal      = ( x ) -> vaq 1; return ( js_type_of x ) == '[object global]'
-@isa_jsregex       = ( x ) -> vaq 1; return ( js_type_of x ) == '[object RegExp]'
-@isa_jserror       = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Error]'
-@isa_jswindow      = ( x ) -> vaq 1; return ( js_type_of x ) == '[object DOMWindow]'
-@isa_jsctx         = ( x ) -> vaq 1; return ( js_type_of x ) == '[object CanvasRenderingContext2D]'
-@isa_jsarraybuffer = ( x ) -> vaq 1; return ( js_type_of x ) == '[object ArrayBuffer]'
+@isa_jsarguments   = ( x ) -> return ( js_type_of x ) == '[object Arguments]'
+@isa_jsnotanumber  = ( x ) -> return isNaN x
+@isa_jsdate        = ( x ) -> return ( js_type_of x ) == '[object Date]'
+@isa_jsglobal      = ( x ) -> return ( js_type_of x ) == '[object global]'
+@isa_jsregex       = ( x ) -> return ( js_type_of x ) == '[object RegExp]'
+@isa_jserror       = ( x ) -> return ( js_type_of x ) == '[object Error]'
+@isa_jswindow      = ( x ) -> return ( js_type_of x ) == '[object DOMWindow]'
+@isa_jsctx         = ( x ) -> return ( js_type_of x ) == '[object CanvasRenderingContext2D]'
+@isa_jsarraybuffer = ( x ) -> return ( js_type_of x ) == '[object ArrayBuffer]'
 #...........................................................................................................
-@isa_jsbuffer      = ( x ) -> vaq 1; return ( js_type_of x ) == '[object Object]' and Buffer.isBuffer x
+@isa_jsbuffer      = ( x ) -> return ( js_type_of x ) == '[object Object]' and Buffer.isBuffer x
 
 #-----------------------------------------------------------------------------------------------------------
 # Replace some of our ``isa_*`` methods by the ≈6× faster methods provided by NodeJS ≥ 0.6.0, where
@@ -127,14 +127,14 @@ js_type_of                = ( x ) -> return Object::toString.call x
 #===========================================================================================================
 # HELPERS
 #-----------------------------------------------------------------------------------------------------------
-vaq = validate_argument_count_equals = ( count ) ->
-  a = arguments.callee.caller.arguments
-  unless a.length == count then throw new Error "expected #{count} arguments, got #{a.length}"
+# vaq = validate_argument_count_equals = ( count ) ->
+#   a = arguments.callee.caller.arguments
+#   unless a.length == count then throw new Error "expected #{count} arguments, got #{a.length}"
 
-#-----------------------------------------------------------------------------------------------------------
-validate_name = ( x ) ->
-  unless @isa_text x   then throw new Error "expected a text, got a #{@type_of x}"
-  unless x.length > 0   then throw new Error "expected a non-empty text, got an empty one"
+# #-----------------------------------------------------------------------------------------------------------
+# validate_name = ( x ) ->
+#   unless @isa_text x   then throw new Error "expected a text, got a #{@type_of x}"
+#   unless x.length > 0   then throw new Error "expected a non-empty text, got an empty one"
 
 #-----------------------------------------------------------------------------------------------------------
 # This registry lists all types that can be meaningfully compared using JS's ``===`` / CS's ``==`` strict
