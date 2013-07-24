@@ -2,13 +2,16 @@
   "name": "coffeenode-types",
   "version": "0.1.0",
   "description": "Sane JavaScript Types FTW ",
-  "main": "main.coffee",
+  "main": "lib/main",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/loveencounterflow/coffeenode-types"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6.2"
   },
   "keywords": [
     "javascript",
@@ -17,5 +20,19 @@
     "datatypes"
   ],
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "larq": {
+    "extensions": {},
+    "compile-statements": {},
+    "%cache": {
+      "routes": {
+        "lib/main.js": 1
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/loveencounterflow/coffeenode-types/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "coffeenode-types@0.1.0"
 }

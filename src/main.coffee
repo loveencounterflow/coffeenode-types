@@ -18,6 +18,8 @@ js_type_of                = ( x ) -> return Object::toString.call x
   '[object Null]':                      'null'
   '[object String]':                    'text'
   #.........................................................................................................
+  '[object Generator]':                 'generator'
+  #.........................................................................................................
   '[object Undefined]':                 'jsundefined'
   '[object Arguments]':                 'jsarguments'
   '[object Date]':                      'jsdate'
