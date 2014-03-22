@@ -1,6 +1,6 @@
 {
   "name": "coffeenode-types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sane JavaScript Types FTW ",
   "main": "lib/main",
   "scripts": {
