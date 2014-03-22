@@ -6,6 +6,9 @@ rpr                       = ( x ) -> return ( require 'util' ).inspect x, false,
 njs_util                  = require 'util'
 js_type_of                = ( x ) -> return Object::toString.call x
 # type_features             = require 'COFFEENODE/Λ/registry/type-features'
+#...........................................................................................................
+### There appear to have been some changes in NodeJS concerning where to find `isXY` methods: ###
+isBuffer                  = Buffer.isBuffer ? njs_util.isBuffer
 
 
 #===========================================================================================================
@@ -31,7 +34,7 @@ js_type_of                = ( x ) -> return Object::toString.call x
   '[object ArrayBuffer]':               'jsarraybuffer'
   #.........................................................................................................
   '[object Object]': ( x ) ->
-    return 'jsbuffer' if Buffer.isBuffer x
+    return 'jsbuffer' if isBuffer x
     return 'pod'
   #.........................................................................................................
   '[object Number]': ( x ) ->
@@ -70,7 +73,10 @@ js_type_of                = ( x ) -> return Object::toString.call x
 # It is outright incredible, some would think frightening, how much manpower has gone into reliable
 # JavaScript type checking. Here is the latest and greatest for a language that can claim to be second
 # to none when it comes to things that should be easy but aren’t: the ‘Miller Device’ by Mark Miller of
-# Google (http://www.caplet.com), popularized by James Crockford of Yahoo!.
+# Google (http://www.caplet.com), popularized by James Crockford of Yahoo!.*
+#
+# As per https://groups.google.com/d/msg/nodejs/P_RzSyPkjkI/NvP28SXvf24J, now also called the 'Flanagan
+# Device'
 #
 # http://ajaxian.com/archives/isarray-why-is-it-so-bloody-hard-to-get-right
 # http://blog.360.yahoo.com/blog-TBPekxc1dLNy5DOloPfzVvFIVOWMB0li?p=916 # page gone
@@ -80,7 +86,7 @@ js_type_of                = ( x ) -> return Object::toString.call x
 @isa_list          = ( x ) -> return ( js_type_of x ) == '[object Array]'
 @isa_boolean       = ( x ) -> return ( js_type_of x ) == '[object Boolean]'
 @isa_function      = ( x ) -> return ( js_type_of x ) == '[object Function]'
-@isa_pod           = ( x ) -> return ( js_type_of x ) == '[object Object]' and not Buffer.isBuffer x
+@isa_pod           = ( x ) -> return ( js_type_of x ) == '[object Object]' and not isBuffer x
 @isa_text          = ( x ) -> return ( js_type_of x ) == '[object String]'
 @isa_number        = ( x ) -> return ( js_type_of x ) == '[object Number]' and isFinite x
 @isa_null          = ( x ) -> return x is null
@@ -97,14 +103,25 @@ js_type_of                = ( x ) -> return Object::toString.call x
 @isa_jsctx         = ( x ) -> return ( js_type_of x ) == '[object CanvasRenderingContext2D]'
 @isa_jsarraybuffer = ( x ) -> return ( js_type_of x ) == '[object ArrayBuffer]'
 #...........................................................................................................
-@isa_jsbuffer      = ( x ) -> return ( js_type_of x ) == '[object Object]' and Buffer.isBuffer x
+@isa_jsbuffer      = isBuffer
 
 #-----------------------------------------------------------------------------------------------------------
 # Replace some of our ``isa_*`` methods by the ≈6× faster methods provided by NodeJS ≥ 0.6.0, where
 # available:
-@isa_list      = njs_util.isArray  if njs_util.isArray?
-@isa_jsregex   = njs_util.isRegExp if njs_util.isRegExp?
-@isa_jsdate    = njs_util.isDate   if njs_util.isDate?
+@isa_list             = njs_util.isArray            if njs_util.isArray?
+@isa_jsregex          = njs_util.isRegExp           if njs_util.isRegExp?
+@isa_jsdate           = njs_util.isDate             if njs_util.isDate?
+@isa_boolean          = njs_util.isBoolean          if njs_util.isBoolean?
+@isa_jserror          = njs_util.isError            if njs_util.isError?
+@isa_function         = njs_util.isFunction         if njs_util.isFunction?
+@isa_primitive        = njs_util.isPrimitive        if njs_util.isPrimitive?
+@isa_text             = njs_util.isString           if njs_util.isString?
+@isa_jsundefined      = njs_util.isUndefined        if njs_util.isUndefined?
+# @isa_null             = njs_util.isNull             if njs_util.isNull?
+# @isa_nullorundefined  = njs_util.isNullOrUndefined  if njs_util.isNullOrUndefined?
+# @isa_number           = njs_util.isNumber           if njs_util.isNumber?
+# @isa_object           = njs_util.isObject           if njs_util.isObject?
+# @isa_symbol           = njs_util.isSymbol           if njs_util.isSymbol?
 
 
 #===========================================================================================================

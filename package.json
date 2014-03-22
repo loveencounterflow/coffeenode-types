@@ -11,7 +11,7 @@
     "url": "https://github.com/loveencounterflow/coffeenode-types"
   },
   "dependencies": {
-    "coffee-script": "~1.6.2"
+    "coffee-script": "~1.7.1"
   },
   "keywords": [
     "javascript",
@@ -21,15 +21,6 @@
   ],
   "author": "",
   "license": "BSD",
-  "larq": {
-    "extensions": {},
-    "compile-statements": {},
-    "%cache": {
-      "routes": {
-        "lib/main.js": 1
-      }
-    }
-  },
   "bugs": {
     "url": "https://github.com/loveencounterflow/coffeenode-types/issues"
   },
